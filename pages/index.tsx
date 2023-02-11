@@ -248,8 +248,7 @@ function Question({ question, setQuestions }: any) {
 	const [isUpdating, setIsUpdating] = useState(false);
 	const [ ticketStatus, setStatus ] = useState( question.status );
 	const [ answareInput, setAnswareInput ] = useState( false );
-	const [ answare, setAnsware ] = useState(question.message);
-
+	
 	async function updateStatus(columnName: string, message: string) {
 		setIsUpdating(true);
 		const { data: updatedQuestion, error } = await supabase
@@ -289,7 +288,6 @@ function Question({ question, setQuestions }: any) {
 				setAnswareInput( !answareInput );
 			} }>Answare</button> : <p>Updating Status</p>}
 			{ answareInput && <textarea placeholder="Add Answare" value={ question.message } onChange={ (e) => { 
-				setAnsware( e.target.value );
 				setTimeout(() => {
 					updateStatus("answer", e.target.value);
 				}, 1000);
