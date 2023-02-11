@@ -22,6 +22,10 @@
 
 ### Locally App will not run if you dont add env vars
 
+### vercel link
+
+### vercel env pull
+
 ## Needs to be done/missing
 
 ### Refactor code to separate componets
@@ -35,3 +39,7 @@
 ### Presist State in the Browsers local/session storage
 
 ### Populate Page with proper ticket information
+
+### email error handleing
+
+### adding proper auth
