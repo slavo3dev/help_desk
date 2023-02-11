@@ -1,9 +1,18 @@
-Brand Colors:
+# Tech Stack
 
-Main Color: #aad2ba
-Btn Colors: #6b8f71
+## NextJS 
+## TypeScrypt
+## Supabase ( serverless DB )
+## DB Postgresql
 
-Source/Font: #1d1e18
+## Deployment
+## Vercal 
 
-2nd Color: #d9fff5
-3rd Color: #b9f5d8
+##  How to run app locally:  
+
+### Clone Repo
+### Yarn Add 
+### yarn run dev
+
+### Locally App will not run if you dont add env vars
+
