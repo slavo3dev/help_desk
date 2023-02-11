@@ -46,7 +46,7 @@ const Home: NextPage = () => {
 			) : null }
             
 			{ ( passCode !== ADMIN_PASS ) && <section className="authContainer">
-				<h2>To Access to Admin Dashboard</h2>
+				<h2>ADMIN ACCESS: </h2>
 				<div className="control">
 					<select onChange={e => setUser(e.target.value)} className="selectStyles">
 						<option value="user">User</option>
