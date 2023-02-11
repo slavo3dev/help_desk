@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect, Key, useRef } from "react";
+import { useState, useEffect, Key  } from "react";
 import type { NextPage } from "next";
 import supabase from "../lib/supabase";
 
@@ -287,7 +287,7 @@ function Question({ question, setQuestions }: any) {
 			{!isUpdating ? <button onClick={ () => {
 				setAnswareInput( !answareInput );
 			} }>Answare</button> : <p>Updating Status</p>}
-			{ answareInput && <textarea placeholder="Add Answare" value={ question.message } onChange={ (e) => { 
+			{ answareInput && <textarea placeholder="Add Answare" value={ question.answare } onChange={ (e) => { 
 				setTimeout(() => {
 					updateStatus("answer", e.target.value);
 				}, 1000);
