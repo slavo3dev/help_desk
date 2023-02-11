@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect, Key } from "react";
+import { useState, useEffect, Key, useRef } from "react";
 import type { NextPage } from "next";
 import supabase from "../lib/supabase";
 
@@ -8,8 +8,12 @@ const Home: NextPage = () => {
 	const [showForm, setShowForm] = useState(false);
 	const [questions, setQuestions] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
-	const [currentCategory, setCurrentCategory] = useState("all");
+	const [ currentCategory, setCurrentCategory ] = useState( "all" );
+	const [ passCode, setPassCode ] = useState( "" );
+	const [ user, setUser ] = useState( "user" );
 
+	const ADMIN_PASS = "iamAdmin!HelpDesk";
+    
 	useEffect(
 		function () {
 			async function getQuestions() {
@@ -32,15 +36,31 @@ const Home: NextPage = () => {
 		},
 		[currentCategory]
 	);
+    
 
 	return (
 		<>
-			<Header showForm={showForm} setShowForm={setShowForm} />
+			<Header showForm={ showForm } setShowForm={ setShowForm } user={user} />
 			{showForm ? (
 				<NewQuestionForm setQuestions={setQuestions} setShowForm={setShowForm} />
-			) : null}
+			) : null }
+            
+			{ ( passCode !== ADMIN_PASS ) && <section className="authContainer">
+				<h2>To Access to Admin Dashboard</h2>
+				<div className="control">
+					<select onChange={e => setUser(e.target.value)} className="selectStyles">
+						<option value="user">User</option>
+						<option value="admin">Admin</option>    
+					</select>
+					{ user === "admin" && <input
+						type='text'
+						placeholder='PassCode'
+						onChange={e => setPassCode(e.target.value)}
+					/> }
+				</div>
+			</section>}
 
-			<main className='main'>
+			{	(passCode === ADMIN_PASS) && <main className='main'>
 				<CategoryFilter setCurrentCategory={setCurrentCategory} />
 
 				{isLoading ? (
@@ -48,17 +68,18 @@ const Home: NextPage = () => {
 				) : (
 					<QuestionsList questions={questions} setQuestions={setQuestions} />
 				)}
-			</main>
+			</main>}
 		</>
 	);
 };
+
 
 function Loader() {
 	return <p className='message'>Loading...</p>;
 }
 
-function Header({ showForm, setShowForm }: any) {
-	const appTitle = "Improve Your Health your Help Desk";
+function Header({ showForm, setShowForm, user }: any) {
+	const appTitle = "Improve Health with Help Desk";
 
 	return (
 		<header className='header'>
@@ -67,12 +88,12 @@ function Header({ showForm, setShowForm }: any) {
 				<h1>{appTitle}</h1>
 			</div>
 
-			<button
+			{ user === "user" && <button
 				className='btn btn-large btn-open'
 				onClick={() => setShowForm((show: any) => !show)}
 			>
-				{showForm ? "Close" : "Share Source"}
-			</button>
+				{showForm ? "Close" : "Ask Question"}
+			</button> }
 		</header>
 	);
 }
@@ -82,17 +103,21 @@ const CATEGORIES: any = [
 	{ name: "Endurance", color: "#16a34a" },
 	{ name: "Mental_Health", color: "#ef4444" },
 	{ name: "Heart_Health", color: "#eab308" },
+	{ name: "Insurance", color: "#eab308" },
 	{ name: "Mushroom_World", color: "#db2777" },
 	{ name: "Workout", color: "#14b8a6" },
-	{ name: "Science", color: "#f97316" },
-	{ name: "News", color: "#8b5cf6" },
+	{ name: "Customer_Service", color: "#f97316" },
+	{ name: "Payments", color: "#8b5cf6" },
 ];
 
 
-function NewQuestionForm({ setQuestions, setShowForm }: any) {
+function NewQuestionForm ( { setQuestions, setShowForm }: any )
+{
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
-	const [category, setCategory] = useState("");
+	const [category, setCategory ] = useState( "" );
+	const [ email, setEmail ] = useState( "" );
+
 	const [ isUploading, setIsUploading ] = useState( false );
     
 	const titleLength = title.length;
@@ -101,14 +126,14 @@ function NewQuestionForm({ setQuestions, setShowForm }: any) {
 	async function handleSubmit(e: { preventDefault: () => void; }) {
 		// 1. Prevent browser reload
 		e.preventDefault();
-		console.log(title, description, category);
+        
 
 		if (titleLength <= 40 && category && descriptionLength <= 200) {
 		
 			setIsUploading(true);
 			const { data: newQuestion, error } = await supabase
 				.from("questions")
-				.insert([{ title, description, category }])
+				.insert([{ title, description, category, email }])
 				.select();
 			setIsUploading(false);
 
@@ -125,15 +150,7 @@ function NewQuestionForm({ setQuestions, setShowForm }: any) {
 	}
 
 	return (
-		<form className='fact-form' onSubmit={handleSubmit}>
-			<input
-				type='text'
-				placeholder='Share a fact with the world...'
-				value={description}
-				onChange={(e) => setDescription(e.target.value)}
-				disabled={isUploading}
-			/>
-			<span>{200 - descriptionLength}</span>
+		<form className='fact-form' onSubmit={ handleSubmit }>
 			<input
 				value={title}
 				type='text'
@@ -141,7 +158,23 @@ function NewQuestionForm({ setQuestions, setShowForm }: any) {
 				onChange={(e) => setTitle(e.target.value)}
 				disabled={isUploading}
 			/>
+			<span>{ 50 - titleLength }</span>
+			<input
+				value={email}
+				type='text'
+				placeholder='email'
+				onChange={(e) => setEmail(e.target.value)}
+				disabled={isUploading}
+			/>
 			<span>{50 - titleLength}</span>
+			<input
+				type='text'
+				placeholder='Feel Free to ask any question...'
+				value={ description }
+				onChange={ ( e ) => setDescription( e.target.value ) }
+				disabled={ isUploading }
+			/>
+			<span>{200 - descriptionLength}</span>
 			<select
 				value={category}
 				onChange={(e) => setCategory(e.target.value)}
@@ -192,7 +225,6 @@ function CategoryFilter({ setCurrentCategory }: any) {
 
 function QuestionsList ( { questions, setQuestions }: any )
 {
-	console.log("Questions: ", questions );
 	if (questions.length === 0)
 		return (
 			<p className='message'>
@@ -207,22 +239,22 @@ function QuestionsList ( { questions, setQuestions }: any )
 					<Question key={question.id} question={question} setQuestions={setQuestions} />
 				))}
 			</ul>
-			<p style={{ color: "#1d1e18"}}>There are {questions.length} source. Add your own source!</p>
+			<p style={{ color: "#1d1e18"}}>There are {questions.length} questions.</p>
 		</section>
 	);
 }
 
 function Question({ question, setQuestions }: any) {
 	const [isUpdating, setIsUpdating] = useState(false);
-	// const badSource =
-	// questions.like + questions.exelent < questions.false;
-	// console.log( "questions: ", questions );
-	console.log("questions !: ", question);
-	async function handleVote(columnName: string) {
+	const [ ticketStatus, setStatus ] = useState( question.status );
+	const [ answareInput, setAnswareInput ] = useState( false );
+	const [ answare, setAnsware ] = useState(question.message);
+
+	async function updateStatus(columnName: string, message: string) {
 		setIsUpdating(true);
 		const { data: updatedQuestion, error } = await supabase
 			.from("questions")
-			.update({ [columnName]: question[columnName] + 1 })
+			.update({ [columnName]: message })
 			.eq("id", question.id)
 			.select();
 		setIsUpdating(false);
@@ -232,13 +264,16 @@ function Question({ question, setQuestions }: any) {
 				facts.map((f: { id: any; }) => (f.id === question.id ? updatedQuestion[0] : f))
 			);
 	}
-
+    
+	const TICKET_STATUS = ["new", "progress", "resolved"];
 	return (
 		<li className='fact'>
-			<a href="/" className='source'>
+			<a href={`/question/${question.id}`} className='source'>
 				{question.title}
 			</a>
-			<p>{question.status}</p>
+			<select value={ticketStatus} onChange={e => {setStatus(e.target.value), updateStatus("status", ticketStatus);}} className="selectStatus">
+				{TICKET_STATUS.map(status => <option value={status}>{status}</option>)}
+			</select>
 			<p>
 				{question.description}
 			</p>
@@ -249,6 +284,17 @@ function Question({ question, setQuestions }: any) {
 			>
 				{question.category}
 			</span>
+			<a href="mailto:webmaster@example.com">{ question.email }</a>
+			{!isUpdating ? <button onClick={ () => {
+				setAnswareInput( !answareInput );
+			} }>Answare</button> : <p>Updating Status</p>}
+			{ answareInput && <textarea placeholder="Add Answare" value={ question.message } onChange={ (e) => { 
+				setAnsware( e.target.value );
+				setTimeout(() => {
+					updateStatus("answer", e.target.value);
+				}, 1000);
+				
+			} } />}
 		</li>
 	);
 }
