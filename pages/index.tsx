@@ -41,7 +41,7 @@ const Home: NextPage = () => {
 	return (
 		<>
 			<Header showForm={ showForm } setShowForm={ setShowForm } user={user} />
-			{showForm ? (
+			{showForm && user === "user" ? (
 				<NewQuestionForm setQuestions={setQuestions} setShowForm={setShowForm} />
 			) : null }
             

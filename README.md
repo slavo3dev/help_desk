@@ -43,3 +43,12 @@
 ### email error handleing
 
 ### adding proper auth
+
+###
+
+```
+POST /tickets
+GET /admin/tickets
+GET /admin/tickets/:id
+PUT /admin/tickets/:id
+```
