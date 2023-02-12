@@ -287,7 +287,7 @@ function Question({ question, setQuestions }: any) {
 			{!isUpdating ? <button onClick={ () => {
 				setAnswareInput( !answareInput );
 			} }>Answare</button> : <p>Updating Status</p>}
-			{ answareInput && <textarea placeholder="Add Answare" value={ question.answare } onChange={ (e) => { 
+			{ answareInput && <textarea placeholder="Add Answare" value={ question.answar } onChange={ (e) => { 
 				setTimeout(() => {
 					updateStatus("answer", e.target.value);
 				}, 1000);
