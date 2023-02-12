@@ -228,7 +228,7 @@ function QuestionsList ( { questions, setQuestions }: any )
 	if (questions.length === 0)
 		return (
 			<p className='message'>
-        No facts for this category yet! Create the first one ✌️
+                No tickets for this category yet! 
 			</p>
 		);
 
