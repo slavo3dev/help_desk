@@ -286,8 +286,8 @@ function Question({ question, setQuestions }: any) {
 			<a href="mailto:webmaster@example.com">{ question.email }</a>
 			{!isUpdating ? <button onClick={ () => {
 				setAnswareInput( !answareInput );
-			} }>Answare</button> : <p>Updating Status</p>}
-			{ answareInput && <textarea placeholder="Add Answare" value={ question.answar } onChange={ (e) => { 
+			} }>Answer</button> : <p>Updating Status</p>}
+			{ answareInput && <textarea placeholder="Answer the question" value={ question.answar } onChange={ (e) => { 
 				setTimeout(() => {
 					updateStatus("answer", e.target.value);
 				}, 1000);
