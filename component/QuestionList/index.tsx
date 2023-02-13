@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Question } from "../Question";
 import { QuestionListProps } from "../../lib/types";
 
-export const QuestionsList: FC<QuestionListProps> =  ( questions, setQuestions  ) => 
+export const QuestionsList: FC<QuestionListProps> =  ({ questions, setQuestions  }) => 
 {
 	if ( questions.length === 0)
 		return (

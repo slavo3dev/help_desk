@@ -7,11 +7,13 @@ import {QuestionProps } from "../../lib/types";
 export const Question: FC<QuestionProps> =  ( { question, setQuestions } ) => {
 	const [isUpdating, setIsUpdating] = useState(false);
 	const [ ticketStatus, setStatus ] = useState( question.status );
+	const [ answareText, setAnswareText ] = useState(question.answer);
 	const [ answareInput, setAnswareInput ] = useState( false );
     
-
+    
 	const styleCategories: any = CATEGORIES;
 	
+	console.log("Question: ", question);
 	async function updateStatus(columnName: string, message: string) {
 		setIsUpdating(true);
 		const { data: updatedQuestion, error } = await supabase
@@ -19,7 +21,10 @@ export const Question: FC<QuestionProps> =  ( { question, setQuestions } ) => {
 			.update({ [columnName]: message })
 			.eq("id", question.id)
 			.select();
-		setIsUpdating(false);
+		setTimeout(() => {
+			setIsUpdating(false);
+		}, 900);
+		
 
 		if (!error)
 			setQuestions((facts: any[]) =>
@@ -51,7 +56,9 @@ export const Question: FC<QuestionProps> =  ( { question, setQuestions } ) => {
 			{!isUpdating ? <button onClick={ () => {
 				setAnswareInput( !answareInput );
 			} }>Answer</button> : <p>Updating Status</p>}
-			{ answareInput && <textarea placeholder="Answer the question" value={ question.answar } onChange={ (e) => { 
+			{ answareInput && <textarea placeholder="Answer the question" value={ answareText } onChange={ ( e ) =>
+			{ 
+				setAnswareText(e.target.value);
 				setTimeout(() => {
 					updateStatus("answer", e.target.value);
 				}, 1000);

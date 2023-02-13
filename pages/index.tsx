@@ -37,6 +37,8 @@ const Home: NextPage = () => {
 		[currentCategory]
 	);
     
+	console.log("Questions: ", questions);
+    
 
 	return (
 		<>

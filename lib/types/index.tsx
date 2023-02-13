@@ -11,6 +11,7 @@ export interface CurrentCategoryProps {
 }
 
 export interface QuestionListProps {
+    [ x: string ]: any;
     questions: any[]
     setQuestions: (arg: any) => void
 }
@@ -23,7 +24,7 @@ export interface QuestionProps {
         description: string, 
         category: string,
         email: string
-        answar: string
+        answer: string
     };
 
     setQuestions: (arg: any) => void 
