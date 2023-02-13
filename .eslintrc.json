@@ -17,6 +17,7 @@
     ],
     "rules": {
         "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/ban-types": "error",
         "indent": [
             "error",
             "tab"
