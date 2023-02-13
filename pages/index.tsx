@@ -3,6 +3,7 @@ import { useState, useEffect  } from "react";
 import type { NextPage } from "next";
 import supabase from "../lib/supabase";
 import { NewQuestionForm, CategoryFilter, QuestionsList, Loader, Header } from "../component";
+import { ADMIN_PASS } from "../lib/constats";
 
 
 const Home: NextPage = () => {
@@ -13,8 +14,6 @@ const Home: NextPage = () => {
 	const [ passCode, setPassCode ] = useState( "" );
 	const [ user, setUser ] = useState( "user" );
 
-	const ADMIN_PASS = "iamAdmin!HelpDesk";
-    
 	useEffect(
 		function () {
 			async function getQuestions() {
