@@ -43,28 +43,28 @@ export const NewQuestionForm: FC<NewQuestionProps> = ( { setQuestions, setShowFo
 	return (
 		<form className='fact-form' onSubmit={ handleSubmit }>
 			<input
+				type='text'
+				placeholder='Aks Question/Description...'
+				value={ description }
+				onChange={ ( e ) => setDescription( e.target.value ) }
+				disabled={ isUploading }
+			/>
+			{/* <span>{ 200 - descriptionLength }</span> */}
+			<input
 				value={title}
 				type='text'
 				placeholder='Title'
 				onChange={(e) => setTitle(e.target.value)}
 				disabled={isUploading}
 			/>
-			<span>{ 50 - titleLength }</span>
+			{/* <span>{ 50 - titleLength }</span> */}
 			<input
 				value={email}
-				type='text'
+				type='email'
 				placeholder='email'
 				onChange={(e) => setEmail(e.target.value)}
 				disabled={isUploading}
 			/>
-			<input
-				type='text'
-				placeholder='Feel Free to ask any question...'
-				value={ description }
-				onChange={ ( e ) => setDescription( e.target.value ) }
-				disabled={ isUploading }
-			/>
-			<span>{200 - descriptionLength}</span>
 			<select
 				value={category}
 				onChange={(e) => setCategory(e.target.value)}
