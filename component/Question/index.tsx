@@ -27,14 +27,14 @@ export const Question: FC<QuestionProps> =  ( { question, setQuestions } ) => {
 		
 
 		if (!error)
-			setQuestions((facts: any[]) =>
-				facts.map((f: { id: any; }) => (f.id === question.id ? updatedQuestion[0] : f))
+			setQuestions((questions: any[]) =>
+				questions.map((f: { id: any; }) => (f.id === question.id ? updatedQuestion[0] : f))
 			);
 	}
     
 	const TICKET_STATUS = ["new", "progress", "resolved"];
 	return (
-		<li className='fact'>
+		<li className='question'>
 			<a href={`/question/${question.id}`} className='source'>
 				{question.title}
 			</a>
@@ -52,7 +52,7 @@ export const Question: FC<QuestionProps> =  ( { question, setQuestions } ) => {
 			>
 				{question.category}
 			</span>
-			<a href={question.email}>{ question.email }</a>
+			<a className="question_email" href={question.email}>{ question.email }</a>
 			{!isUpdating ? <button onClick={ () => {
 				setAnswareInput( !answareInput );
 			} }>Answer</button> : <p>Updating Status</p>}

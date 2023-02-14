@@ -24,11 +24,11 @@ const Home: NextPage = () => {
 				if (currentCategory !== "all")
 					query = query.eq("category", currentCategory);
 
-				const { data: facts, error }: any = await query
+				const { data: question, error }: any = await query
 					.order("like", { ascending: false })
 					.limit(1000);
 
-				if (!error) setQuestions(facts);
+				if (!error) setQuestions(question);
 				else alert("There was a problem getting data");
 				setIsLoading(false);
 			}
@@ -37,9 +37,7 @@ const Home: NextPage = () => {
 		[currentCategory]
 	);
     
-	console.log("Questions: ", questions);
-    
-
+	
 	return (
 		<>
 			<Header showForm={ showForm } setShowForm={ setShowForm } user={user} />
