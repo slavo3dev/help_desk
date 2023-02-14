@@ -41,7 +41,7 @@ export const NewQuestionForm: FC<NewQuestionProps> = ( { setQuestions, setShowFo
 	}
 
 	return (
-		<form className='fact-form' onSubmit={ handleSubmit }>
+		<form className='question-form' onSubmit={ handleSubmit }>
 			<input
 				type='text'
 				placeholder='Aks Question/Description...'
