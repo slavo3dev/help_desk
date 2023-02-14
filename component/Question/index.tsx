@@ -1,7 +1,8 @@
 import { useState, FC } from "react";
 import supabase from "../../lib/supabase";
 import { CATEGORIES } from "../../lib/constats";
-import {QuestionProps } from "../../lib/types";
+import { QuestionProps } from "../../lib/types";
+import axios from "axios";
 
 
 export const Question: FC<QuestionProps> =  ( { question, setQuestions } ) => {
@@ -9,6 +10,7 @@ export const Question: FC<QuestionProps> =  ( { question, setQuestions } ) => {
 	const [ ticketStatus, setStatus ] = useState( question.status );
 	const [ answareText, setAnswareText ] = useState(question.answer);
 	const [ answareInput, setAnswareInput ] = useState( false );
+	const [ isSend, setIsSend ] = useState();
     
     
 	const styleCategories: any = CATEGORIES;
@@ -32,6 +34,24 @@ export const Question: FC<QuestionProps> =  ( { question, setQuestions } ) => {
 			);
 	}
     
+
+	async function sendEmail () {  
+		try {
+			const resposnse: any = axios.post( `${process.env.NEXT_PUBLIC_API_URL}/api/sendemail`, {
+				email: question.email,
+				ticketStatus: ticketStatus, 
+				answare: answareText
+			} );
+            
+			console.log("Resposne: ", resposnse);
+			setIsSend(resposnse);
+            
+		} catch (error) {
+			console.warn("Error: ", error);
+		}
+
+	}
+    
 	const TICKET_STATUS = ["new", "progress", "resolved"];
 	return (
 		<li className='question'>
@@ -52,7 +72,7 @@ export const Question: FC<QuestionProps> =  ( { question, setQuestions } ) => {
 			>
 				{question.category}
 			</span>
-			<a className="question_email" href={question.email}>{ question.email }</a>
+			<p className="question_email" onClick={sendEmail}>{ question.email }</p>
 			{!isUpdating ? <button onClick={ () => {
 				setAnswareInput( !answareInput );
 			} }>Answer</button> : <p>Updating Status</p>}
