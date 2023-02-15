@@ -34,3 +34,8 @@ export interface NewQuestionProps {
     setQuestions: ( arg: any ) => void; 
     setShowForm: any
 }
+
+export interface LoaderProp
+{
+    title: string
+}

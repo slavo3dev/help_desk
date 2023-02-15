@@ -2,10 +2,8 @@
 import { useState, useEffect  } from "react";
 import type { NextPage } from "next";
 import supabase from "../lib/supabase";
-import { NewQuestionForm, CategoryFilter, QuestionsList, Loader, Header } from "../component";
+import { NewQuestionForm, CategoryFilter, QuestionsList, Loader, Header, OpenAI, Footer } from "../components";
 import { ADMIN_PASS } from "../lib/constats";
-import axios from "axios";
-
 
 const Home: NextPage = () => {
 	const [ showForm, setShowForm ] = useState<boolean>( false );
@@ -14,7 +12,7 @@ const Home: NextPage = () => {
 	const [ currentCategory, setCurrentCategory ] = useState( "all" );
 	const [ passCode, setPassCode ] = useState( "" );
 	const [ user, setUser ] = useState( "user" );
-
+    
 
 	useEffect(
 		function () {
@@ -37,7 +35,6 @@ const Home: NextPage = () => {
 		},
 		[currentCategory, showForm ]
 	);
-    
 	
 	return (
 		<>
@@ -45,6 +42,8 @@ const Home: NextPage = () => {
 			{showForm && user === "user" ? (
 				<NewQuestionForm setQuestions={setQuestions} setShowForm={setShowForm} />
 			) : null }
+            
+			{ user === "user" && <OpenAI /> }
             
 			{ ( passCode !== ADMIN_PASS ) && <section className="authContainer">
 				<h2>ADMIN ACCESS: </h2>
@@ -59,17 +58,19 @@ const Home: NextPage = () => {
 						onChange={e => setPassCode(e.target.value)}
 					/> }
 				</div>
-			</section>}
+			</section> }
+            
 
 			{	(passCode === ADMIN_PASS) && <main className='main'>
 				<CategoryFilter setCurrentCategory={setCurrentCategory} />
 
 				{isLoading ? (
-					<Loader />
+					<Loader title={"Loading..."} />
 				) : (
 					<QuestionsList questions={questions} setQuestions={setQuestions} />
 				)}
-			</main>}
+			</main> }
+			<Footer />
 		</>
 	);
 };
