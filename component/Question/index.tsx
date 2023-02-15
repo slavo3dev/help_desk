@@ -15,7 +15,6 @@ export const Question: FC<QuestionProps> =  ( { question, setQuestions } ) => {
     
 	const styleCategories: any = CATEGORIES;
 	
-	console.log("Question: ", question);
 	async function updateStatus(columnName: string, message: string) {
 		setIsUpdating(true);
 		const { data: updatedQuestion, error } = await supabase
@@ -43,7 +42,6 @@ export const Question: FC<QuestionProps> =  ( { question, setQuestions } ) => {
 				answare: answareText
 			} );
             
-			console.log("Resposne: ", resposnse);
 			setIsSend(resposnse);
             
 		} catch (error) {

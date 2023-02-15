@@ -4,15 +4,17 @@ import type { NextPage } from "next";
 import supabase from "../lib/supabase";
 import { NewQuestionForm, CategoryFilter, QuestionsList, Loader, Header } from "../component";
 import { ADMIN_PASS } from "../lib/constats";
+import axios from "axios";
 
 
 const Home: NextPage = () => {
-	const [showForm, setShowForm] = useState<boolean>(false);
+	const [ showForm, setShowForm ] = useState<boolean>( false );
 	const [questions, setQuestions] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [ currentCategory, setCurrentCategory ] = useState( "all" );
 	const [ passCode, setPassCode ] = useState( "" );
 	const [ user, setUser ] = useState( "user" );
+
 
 	useEffect(
 		function () {
@@ -20,21 +22,20 @@ const Home: NextPage = () => {
 				setIsLoading(true);
 
 				let query = supabase.from("questions").select("*");
-
 				if (currentCategory !== "all")
 					query = query.eq("category", currentCategory);
 
 				const { data: question, error }: any = await query
 					.order("like", { ascending: false })
 					.limit(1000);
-
+                
 				if (!error) setQuestions(question);
 				else alert("There was a problem getting data");
 				setIsLoading(false);
 			}
 			getQuestions();
 		},
-		[currentCategory]
+		[currentCategory, showForm ]
 	);
     
 	
