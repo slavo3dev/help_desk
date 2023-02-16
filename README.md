@@ -4,6 +4,8 @@
 
 ### NextJS
 
+### TypeScript
+
 ### Auth0
 
 ### Supabase

@@ -51,7 +51,7 @@ export const Hero: FC = () =>
 									className="block hover-up-2 sm:inline-block py-4 px-8 text-xs text-blueGray-500 hover:text-blueGray-600 text-center font-semibold leading-none bg-white border border-blueGray-200 hover:border-blueGray-300 rounded wow animate__animated animate__fadeIn"
 									data-wow-delay=".3s"
 									onClick={() => { user ? "" : alert("Please Login to use AI Mentor");} }
-									href="#openai"
+									href={`/api/auth/${user ? "#openai" : "login"}`}
 								>
                                     AI Mentor
 								</Link>
