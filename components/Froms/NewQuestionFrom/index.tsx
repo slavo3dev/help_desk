@@ -32,8 +32,6 @@ export const NewQuestionForm: FC<NewQuestionProps> = ( { setQuestions, setShowFo
 				} );
 				setQuestions( ( questions: any ) => [ questions[ 0 ], ...questions ] );
                 
-				alert(res.data.ticket);
-				
 				setTimeout(() => {
 					setTitle("");
 					setDescription("");
@@ -53,16 +51,8 @@ export const NewQuestionForm: FC<NewQuestionProps> = ( { setQuestions, setShowFo
 
 	return (
 		<>
-			{ isUploading && <h3 style={ { color:"red", textDecoration: "underline", backgroundColor: "white", padding: "10px"}}>Please Wait, We are submiting your question!!</h3>}
+			{ isUploading && <h3 style={ { color:"red", textDecoration: "underline", backgroundColor: "white", padding: "10px"}}>Please Wait, We are Submiting your Question - you will got email with answare in 48h</h3>}
 			<form className='question-form' onSubmit={ handleSubmit }>
-				<input
-					value={title}
-					type='text'
-					placeholder='Title'
-					onChange={(e) => setTitle(e.target.value)}
-					disabled={isUploading}
-				/>
-				{/* <span>{ 50 - titleLength }</span> */}
 				<input
 					type='text'
 					placeholder='Aks Question/Description...'
@@ -71,6 +61,14 @@ export const NewQuestionForm: FC<NewQuestionProps> = ( { setQuestions, setShowFo
 					disabled={ isUploading }
 				/>
 				{/* <span>{ 200 - descriptionLength }</span> */}
+				<input
+					value={title}
+					type='text'
+					placeholder='Title'
+					onChange={(e) => setTitle(e.target.value)}
+					disabled={isUploading}
+				/>
+				{/* <span>{ 50 - titleLength }</span> */}
 				<select
 					value={category}
 					onChange={(e) => setCategory(e.target.value)}
