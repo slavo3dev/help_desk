@@ -8,7 +8,6 @@ export const Header: FC<HeaderProps> = ({ showForm, setShowForm }) =>  {
 	const appTitle = "Foo(Nomad)";
 	const user:  any = useUser();
 
-	console.log("USer: ", user?.user?.email);
 	return (
 		<header className='header'>
 			<div className='logo'>
