@@ -4,7 +4,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import * as ga from "../lib/ga";
-import { MainLayout } from "../components";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 
 function MyApp ( { Component, pageProps }: AppProps )
 {
@@ -40,7 +40,9 @@ function MyApp ( { Component, pageProps }: AppProps )
 				<meta property="og:image" key="og:image" content={`${process.env.BASE_URL}/images/lion-favicon.png`} />
 				<title>AI for Better Life, Travel and Freedom...Your 24/7 Mentor</title>
 			</Head>	
-			<Component { ...pageProps } />
+			<UserProvider>
+				<Component { ...pageProps } />
+			</UserProvider>
 		</>
 	);
 }

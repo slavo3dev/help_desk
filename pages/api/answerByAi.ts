@@ -19,7 +19,7 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
 	} );
     
 	const question = req.body.questionInput ? req.body.questionInput : "";
-    
+	const mentor = req.body.mentor === "Andrew" ? "neuroscientist Andrew Huberman" : "Professor in the Department of Genetics David Sinclair"; 
 
 	const openAi = new OpenAIApi( config );
 
@@ -29,7 +29,7 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
 		max_tokens: 3600,
 		prompt: `Answare the question about health, fitness, wellness and diet! 
         Quesetion: ${ question }. 
-        Advices, Suggestions from neuroscientist Andrew Huberman or Professor in the Department of Genetics David Sinclair`
+        Advices, Suggestions from ${mentor}`
 	} );
     
 	res.status(200).json({ answer: response.data.choices });  

@@ -5,7 +5,7 @@ export const Footer: FC = () =>  {
 	return (
 		<footer className="bg-transparent sm:p-6 static bottom-0">
 			<div className="sm:flex sm:items-center sm:justify-between">
-				<span className="text-sm sm:text-center dark:text-gray-900">© 2023 <a href="https://slavo.io/" target="_blank" className="hover:underline">slavo.io</a> | All Rights Reserved.
+				<span className="text-sm sm:text-center dark:text-gray-900">© 2023 <a href="https://slavo.io/" target="_blank" className="hover:underline dark:text-gray-900">slavo.io</a> | All Rights Reserved.
 				</span>
 				<div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
 					<a href="https://www.facebook.com/slavo.io" className="text-gray-500 hover:text-gray-900 dark:hover:text-white">

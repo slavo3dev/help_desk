@@ -2,7 +2,6 @@
 export interface HeaderProps
 {
     showForm: boolean;
-    user: string;
     setShowForm: ( arg: any ) => void
 }
 

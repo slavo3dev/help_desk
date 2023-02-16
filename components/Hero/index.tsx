@@ -1,9 +1,11 @@
 import { FC } from "react";
 import { TextEffect } from "../Elements/TextEffect";
-
+import Link from "next/link";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 export const Hero: FC = () =>
 {
+	const { user } = useUser();
 	return (
 		<section className="bg-white text-black p-6">
 			<div
@@ -38,21 +40,22 @@ export const Hero: FC = () =>
                                 AI is targeting answers based on suggestions from<br/><strong>Andrew Huberman & David Sinclair!</strong> 
 								</h4>
 							</div>
-							{/* <div className="text-center lg:text-left">
-								<a
+							<div className="text-center lg:text-left">
+								<Link
 									className="tracking-wide hover-up-2 block sm:inline-block py-4 px-8 mb-4 sm:mb-0 sm:mr-3 text-xs text-white text-center font-semibold leading-none bg-blue-400 hover:bg-blue-500 rounded wow animate__animated animate__fadeIn"
-									href="#key-features"
+									href={`/api/auth/${user ? "logout" : "login"}`}
 								>
-                      Key Features
-								</a>
-								<a
+									{user ? "Logout" : "Login" }
+								</Link>
+								<Link
 									className="block hover-up-2 sm:inline-block py-4 px-8 text-xs text-blueGray-500 hover:text-blueGray-600 text-center font-semibold leading-none bg-white border border-blueGray-200 hover:border-blueGray-300 rounded wow animate__animated animate__fadeIn"
 									data-wow-delay=".3s"
-									href="#how-we-work"
+									onClick={() => { user ? "" : alert("Please Login to use AI Mentor");} }
+									href="#openai"
 								>
-                      How We Work?
-								</a>
-							</div> */}
+                                    AI Mentor
+								</Link>
+							</div>
 						</div>
 					</div>
 					<div className="w-full lg:w-1/2 px-3 lg:bg-blueGray-10 mb-12 lg:mb-0 pb-10 md:p-2">
