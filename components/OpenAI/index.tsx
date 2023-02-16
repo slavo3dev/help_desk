@@ -22,7 +22,7 @@ export const OpenAI: FC = () => {
 
 	return (
 		<>
-			<div className="max-w-sm rounded overflow-hidden shadow-lg lg:max-w-full lg:flex lg:w-1/2 sm:w-full" id="openai">
+			<div className="max-w-sm rounded overflow-hidden shadow-lg lg:max-w-full lg:flex lg:w-full sm:w-full" id="openai">
 				<div className="bg-white shadow-md rounded px-8 pt-6 pb-8 w-full lg:max-w-full">
 					<div className="mb-4 pl-8 pr-8 flex items-center justify-center pb-4 flex-col">
 						<label className="block text-gray-700 text-xl text-center font-bold mb-2" >

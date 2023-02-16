@@ -2,10 +2,12 @@ import { FC } from "react";
 import { TextEffect } from "../Elements/TextEffect";
 import Link from "next/link";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import { OpenAI } from "../OpenAI";
 
 export const Hero: FC = () =>
 {
-	const { user } = useUser();
+	const user: any  = useUser();
+    
 	return (
 		<section className="bg-white text-black p-6">
 			<div
@@ -43,27 +45,28 @@ export const Hero: FC = () =>
 							<div className="text-center lg:text-left">
 								<Link
 									className="tracking-wide hover-up-2 block sm:inline-block py-4 px-8 mb-4 sm:mb-0 sm:mr-3 text-xs text-white text-center font-semibold leading-none bg-blue-400 hover:bg-blue-500 rounded wow animate__animated animate__fadeIn"
-									href={`/api/auth/${user ? "logout" : "login"}`}
+									href={`/api/auth/${user?.user?.email !== undefined ? "logout" : "login"}`}
 								>
-									{user ? "Logout" : "Login" }
+									{user?.user?.email !== undefined ? "Logout" : "Login" }
 								</Link>
-								<Link
+								{/* <Link
 									className="block hover-up-2 sm:inline-block py-4 px-8 text-xs text-blueGray-500 hover:text-blueGray-600 text-center font-semibold leading-none bg-white border border-blueGray-200 hover:border-blueGray-300 rounded wow animate__animated animate__fadeIn"
 									data-wow-delay=".3s"
-									href={`/api/auth/${user ? "#openai" : "login"}`}
+									href="#openai" 
 								>
                                     AI Mentor
-								</Link>
+								</Link> */}
 							</div>
 						</div>
 					</div>
 					<div className="w-full lg:w-1/2 px-3 lg:bg-blueGray-10 mb-12 lg:mb-0 pb-10 md:p-2">
 						<div className="flex items-center justify-center">
-							<img
-								className="lg:max-w-lg lg:scale-100"
-								src="/images/components/team.svg"
-								alt="Foo(Nomad) - Consulting/Metorship Platform"
-							/>
+							{ user?.user?.email !== undefined ? <OpenAI /> : 
+								<img
+									className="lg:max-w-lg lg:scale-100"
+									src="/images/components/team.svg"
+									alt="Foo(Nomad) - Consulting/Metorship Platform"
+								/> }
 						</div>
 					</div>
 				</div>

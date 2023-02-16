@@ -45,11 +45,9 @@ const Home: NextPage = () => {
 				<NewQuestionForm setQuestions={setQuestions} setShowForm={setShowForm} />
 			) : null }
             
+            
 			<Hero />
             
-			{user?.user?.email !== undefined && <div className="flex items-center justify-center p-5">
-				<OpenAI /> 
-			</div>}
             
 			<div style={{ display: "none"}}>
 				{ ( passCode !== ADMIN_PASS && user?.user === undefined ) && <section className="authContainer">
