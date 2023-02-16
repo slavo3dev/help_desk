@@ -2,7 +2,7 @@
 import { useState, useEffect  } from "react";
 import type { NextPage } from "next";
 import supabase from "../lib/supabase";
-import { NewQuestionForm, CategoryFilter, QuestionsList, Loader, Header, OpenAI, Footer } from "../components";
+import { NewQuestionForm, CategoryFilter, QuestionsList, Loader, Header, OpenAI, Footer, Hero } from "../components";
 import { ADMIN_PASS } from "../lib/constats";
 
 const Home: NextPage = () => {
@@ -38,12 +38,17 @@ const Home: NextPage = () => {
 	
 	return (
 		<>
-			<Header showForm={ showForm } setShowForm={ setShowForm } user={user} />
+			<Header showForm={ showForm } setShowForm={ setShowForm } user={ user } />
 			{showForm && user === "user" ? (
 				<NewQuestionForm setQuestions={setQuestions} setShowForm={setShowForm} />
 			) : null }
             
-			{ user === "user" && <OpenAI /> }
+			<Hero />
+            
+			<div className="flex items-center justify-center p-5">
+				{ user === "user" && <OpenAI /> }
+			</div>
+            
             
 			{ ( passCode !== ADMIN_PASS ) && <section className="authContainer">
 				<h2>ADMIN ACCESS: </h2>
