@@ -27,9 +27,7 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
 		model: "text-davinci-003",
 		temperature: 0,
 		max_tokens: 3600,
-		prompt: `Answare the question abouton on how to improve your mental and physical health, fitness, wellness, diet, supplements 
-        Quesetion: ${ question }. 
-        Advices, Suggestions from ${mentor}`
+		prompt: `Answare the question abouton on how to improve your mental and physical health, fitness, wellness, diet, supplements Quesetion: ${ question }. Advices, Suggestions from ${mentor}`
 	} );
     
 	res.status(200).json({ answer: response.data.choices });  
