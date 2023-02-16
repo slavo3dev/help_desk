@@ -11,13 +11,20 @@ export const OpenAI: FC = () => {
 
 	const handleApiAI = async () =>
 	{
-		setIsLoading(true);
-		const res = await axios.post( "api/answerByAi", {
-			questionInput,
-			mentor
-		} );
-		setAiRes( res );
-		setIsLoading(false);
+		setIsLoading( true );
+		try {
+			const res = await axios.post( "api/answerByAi", {
+				questionInput,
+				mentor
+			} );
+			setAiRes( res );
+			setIsLoading(false);
+		} catch ( error )
+		{
+			setAiRes("Oops... We are very sorry, something went wrong please try again ");
+			setIsLoading(false);
+			throw new Error("Something Went Wrong!!");
+		}
 	};
 
 	return (
