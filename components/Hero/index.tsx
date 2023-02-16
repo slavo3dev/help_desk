@@ -25,11 +25,11 @@ export const Hero: FC = () =>
                       Future & Growth
 								</h2>
 								<p className="text-blueGray-400 leading-relaxed wow animate__animated animate__fadeIn">
-                      Foo (Nomad){" "}
+                      Foo(Nomad){" "}
 									<strong className="text-blue-500">
-                                        connects you with Professionals! <br />
+                                        connects you with Professionals / Mentors! <br />
 									</strong><br />
-                                      Feel Free to ask them for advice, suggestion, a learning roadmap, etc.</p><br />
+                                      Feel Free to ask them for advice, suggestions, learning... etc.</p><br />
 								<p> With the Power of AI, your Mentor will be{" "}
 									<span className="typewrite d-inline text-brand">
 										<TextEffect
