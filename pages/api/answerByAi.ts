@@ -27,8 +27,11 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
 		model: "text-davinci-003",
 		temperature: 0,
 		max_tokens: 3600,
-		prompt: `Answare the question on how To improve your mental and physical health, fitness, wellness, diet, and supplements, I suggest focusing on getting adequate sleep, eating a balanced diet, and engaging in regular physical activity, Quesetion: ${ question }. Advices, Suggestions from ${mentor}`
+		prompt: `Answare the question on how To improve your mental and physical health, fitness, wellness, diet, and supplements, I suggest focusing on getting adequate sleep, eating a balanced diet, and engaging in regular physical activity, Quesetion: ${ question }. Advices, Suggestions from ${ mentor }
+        the resposne should be formatted to HTML`
 	} );
+    
+	console.log(response.data.choices);
     
 	res.status(200).json({ answer: response.data.choices });  
 

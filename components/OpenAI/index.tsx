@@ -60,9 +60,7 @@ export const OpenAI: FC = () => {
 					</div>
 					{ isLoading ? <Loader title={"Please Wait... Answer is coming..."} /> :
 						aiRes?.data?.answer.map( ( answer: { text: string; } ) =>
-							<p key={ Math.random() } className="text-gray-700 text-base p-8">
-								{ answer.text }
-							</p> ) 
+							<div key={ Math.random() } dangerouslySetInnerHTML={{__html: answer.text }} className="text-gray-700 text-base p-8" /> ) 
 					}
 				</div>
 			</div>

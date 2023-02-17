@@ -2,7 +2,7 @@
 import { useState, useEffect  } from "react";
 import type { NextPage } from "next";
 import supabase from "../lib/supabase";
-import { NewQuestionForm, CategoryFilter, QuestionsList, Loader, Header, OpenAI, Footer, Hero } from "../components";
+import { NewQuestionForm, CategoryFilter, QuestionsList, Loader, Header, Footer, Hero } from "../components";
 import { ADMIN_PASS } from "../lib/constats";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
