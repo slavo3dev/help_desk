@@ -175,8 +175,7 @@ ul {
   border-radius: 16px;
 }
 
-.question-form input,
-.question-form select {
+.question-form input {
   width: 220px;
   background-color: #6b8f71;
   border: none;
@@ -259,7 +258,7 @@ ul {
   }
 
   .question-form input,
-  .question-form select {
+  .question-form  {
     margin: 1rem;
     width: auto;
   }

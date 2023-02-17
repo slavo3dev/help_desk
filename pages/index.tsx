@@ -41,14 +41,11 @@ const Home: NextPage = () => {
 	return (
 		<>
 			<Header showForm={ showForm } setShowForm={ setShowForm } />
-			{showForm && users === "users" ? (
+			{ showForm ? (
 				<NewQuestionForm setQuestions={setQuestions} setShowForm={setShowForm} />
 			) : null }
-            
-            
 			<Hero />
-            
-            
+			{/*  Need to find a way to place for admin panel - Probably Header  */}
 			<div style={{ display: "none"}}>
 				{ ( passCode !== ADMIN_PASS && user?.user === undefined ) && <section className="authContainer">
 					<h2>ADMIN ACCESS: </h2>
