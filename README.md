@@ -8,6 +8,6 @@
 
 ### Auth0
 
-### Supabase DB & Auth
+### Supabase DB
 
 ### Vercel
