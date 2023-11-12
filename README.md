@@ -1,4 +1,4 @@
-# Teck Stack
+## Teck Stack
 
 ### ChatGPT
 
