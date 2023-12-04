@@ -6,8 +6,4 @@
 
 ### TypeScript
 
-### Auth0
 
-### Supabase
-
-### Vercel
