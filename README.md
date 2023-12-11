@@ -3,7 +3,3 @@
 ### ChatGPT
 
 ### NextJS
-
-### TypeScript
-
-### Needs refactor
