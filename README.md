@@ -2,4 +2,3 @@
 
 ### ChatGPT
 
-### NextJS
